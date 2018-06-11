@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>R for Simulation Studies</title>
+  <meta name="description" content="R for Simulation Studies">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="R for Simulation Studies" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="R for Simulation Studies" />
+  
+  
+  
+
+<meta name="author" content="Jayden Nord">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="functionals.html">
+<link rel="next" href="random-sampling-and-variate-generation.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="part"><span><b>I R essentials</b></span></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#readings"><i class="fa fa-check"></i><b>1.1</b> Readings</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#focus"><i class="fa fa-check"></i><b>1.2</b> Focus</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html"><i class="fa fa-check"></i><b>2</b> Data structures and operations</a><ul>
+<li class="chapter" data-level="2.1" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#readings-1"><i class="fa fa-check"></i><b>2.1</b> Readings</a></li>
+<li class="chapter" data-level="2.2" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#focus-1"><i class="fa fa-check"></i><b>2.2</b> Focus</a></li>
+<li class="chapter" data-level="2.3" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#matrices"><i class="fa fa-check"></i><b>2.3</b> Matrices</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#matrix-creation"><i class="fa fa-check"></i><b>2.3.1</b> Matrix creation</a></li>
+<li class="chapter" data-level="2.3.2" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#dimensions-and-length-incomplete"><i class="fa fa-check"></i><b>2.3.2</b> Dimensions and length [INCOMPLETE]</a></li>
+<li class="chapter" data-level="2.3.3" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#dimnames-and-names-incomplete"><i class="fa fa-check"></i><b>2.3.3</b> Dimnames and names [INCOMPLETE]</a></li>
+<li class="chapter" data-level="2.3.4" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#matrix-binding"><i class="fa fa-check"></i><b>2.3.4</b> Matrix binding</a></li>
+<li class="chapter" data-level="2.3.5" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#matrix-coercion"><i class="fa fa-check"></i><b>2.3.5</b> Matrix coercion</a></li>
+<li class="chapter" data-level="2.3.6" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#matrix-operations"><i class="fa fa-check"></i><b>2.3.6</b> Matrix operations</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="data-structures-and-operations.html"><a href="data-structures-and-operations.html#exercises"><i class="fa fa-check"></i><b>2.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="indexing.html"><a href="indexing.html"><i class="fa fa-check"></i><b>3</b> Indexing</a><ul>
+<li class="chapter" data-level="3.1" data-path="indexing.html"><a href="indexing.html#readings-2"><i class="fa fa-check"></i><b>3.1</b> Readings</a></li>
+<li class="chapter" data-level="3.2" data-path="indexing.html"><a href="indexing.html#focus-2"><i class="fa fa-check"></i><b>3.2</b> Focus</a></li>
+<li class="chapter" data-level="3.3" data-path="indexing.html"><a href="indexing.html#exercises-1"><i class="fa fa-check"></i><b>3.3</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="control-structures.html"><a href="control-structures.html"><i class="fa fa-check"></i><b>4</b> Control structures</a><ul>
+<li class="chapter" data-level="4.1" data-path="control-structures.html"><a href="control-structures.html#readings-3"><i class="fa fa-check"></i><b>4.1</b> Readings</a></li>
+<li class="chapter" data-level="4.2" data-path="control-structures.html"><a href="control-structures.html#focus-3"><i class="fa fa-check"></i><b>4.2</b> Focus</a></li>
+<li class="chapter" data-level="4.3" data-path="control-structures.html"><a href="control-structures.html#ifelse-part-1"><i class="fa fa-check"></i><b>4.3</b> <code>ifelse()</code> part 1</a></li>
+<li class="chapter" data-level="4.4" data-path="control-structures.html"><a href="control-structures.html#exercises-2"><i class="fa fa-check"></i><b>4.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>5</b> Functions</a><ul>
+<li class="chapter" data-level="5.1" data-path="functions.html"><a href="functions.html#readings-4"><i class="fa fa-check"></i><b>5.1</b> Readings</a></li>
+<li class="chapter" data-level="5.2" data-path="functions.html"><a href="functions.html#focus-4"><i class="fa fa-check"></i><b>5.2</b> Focus</a></li>
+<li class="chapter" data-level="5.3" data-path="functions.html"><a href="functions.html#ifelse-part-2"><i class="fa fa-check"></i><b>5.3</b> <code>ifelse()</code> part 2</a></li>
+<li class="chapter" data-level="5.4" data-path="functions.html"><a href="functions.html#exercises-3"><i class="fa fa-check"></i><b>5.4</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="functionals.html"><a href="functionals.html"><i class="fa fa-check"></i><b>6</b> Functionals</a><ul>
+<li class="chapter" data-level="6.1" data-path="functionals.html"><a href="functionals.html#readings-5"><i class="fa fa-check"></i><b>6.1</b> Readings</a></li>
+<li class="chapter" data-level="6.2" data-path="functionals.html"><a href="functionals.html#focus-5"><i class="fa fa-check"></i><b>6.2</b> Focus</a></li>
+<li class="chapter" data-level="6.3" data-path="functionals.html"><a href="functionals.html#exercises-4"><i class="fa fa-check"></i><b>6.3</b> Exercises</a></li>
+</ul></li>
+<li class="part"><span><b>II Data generation</b></span></li>
+<li class="chapter" data-level="7" data-path="statistics-review.html"><a href="statistics-review.html"><i class="fa fa-check"></i><b>7</b> Statistics review</a></li>
+<li class="chapter" data-level="8" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html"><i class="fa fa-check"></i><b>8</b> Random sampling and variate generation</a><ul>
+<li class="chapter" data-level="8.1" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#random-sampling-incomplete"><i class="fa fa-check"></i><b>8.1</b> Random sampling [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.2" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#univariate-random-samples-incomplete"><i class="fa fa-check"></i><b>8.2</b> Univariate random samples [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.3" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#multivariate-normal-samples-incomplete"><i class="fa fa-check"></i><b>8.3</b> Multivariate normal samples [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.4" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#pseudo-randomness-incomplete"><i class="fa fa-check"></i><b>8.4</b> Pseudo-randomness [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.5" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#exercises-5"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generation from linear models</a><ul>
+<li class="chapter" data-level="9.1" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#linear-combination-review"><i class="fa fa-check"></i><b>9.1</b> Linear combination review</a></li>
+<li class="chapter" data-level="9.2" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#exogeneity-and-endogeneity"><i class="fa fa-check"></i><b>9.2</b> Exogeneity and endogeneity</a></li>
+<li class="chapter" data-level="9.3" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#general-procedure"><i class="fa fa-check"></i><b>9.3</b> General procedure</a></li>
+<li class="chapter" data-level="9.4" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#examples"><i class="fa fa-check"></i><b>9.4</b> Examples</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#crt"><i class="fa fa-check"></i><b>9.4.1</b> CRT</a></li>
+<li class="chapter" data-level="9.4.2" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#correlated-outcomes"><i class="fa fa-check"></i><b>9.4.2</b> Correlated outcomes</a></li>
+<li class="chapter" data-level="9.4.3" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#mediation"><i class="fa fa-check"></i><b>9.4.3</b> Mediation</a></li>
+<li class="chapter" data-level="9.4.4" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#multilevel"><i class="fa fa-check"></i><b>9.4.4</b> Multilevel</a></li>
+<li class="chapter" data-level="9.4.5" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#sem"><i class="fa fa-check"></i><b>9.4.5</b> SEM</a></li>
+</ul></li>
+<li class="chapter" data-level="9.5" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#exercises-6"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="multiple-replications-and-conditions.html"><a href="multiple-replications-and-conditions.html"><i class="fa fa-check"></i><b>10</b> Multiple replications and conditions</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Simulation Studies</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="statistics-review" class="section level1">
+<h1><span class="header-section-number">7</span> Statistics review</h1>
+<p>Before describing random number generation, some terminology and estimation concepts are reviewed.</p>
+<p>A <em>random variable</em> is a variable that can assume various numerical outcomes subject to a random process. The probability of those outcomes are described by a <em>probability distribution</em>. Random variables are described and defined by paremeters (e.g. <span class="math inline">\(\theta\)</span>). At any time, values of the random variable can be recorded; such recordings are called <em>observations</em> or <em>random variates</em>. Random variables tend to be denoted with upper-case letters (e.g. <span class="math inline">\(X\)</span>) while observations tend to be denoted with lower-case letters (e.g. <span class="math inline">\(x\)</span>).</p>
+<p>A <em>random sample</em> is a collection of <span class="math inline">\(n\)</span> random variables that are identically and independently distributed (iid). In this text, random samples will be denoted with vector notation such as <span class="math inline">\(\vec{X} = X_1,\dots,X_n\)</span>. The <em>observed sample</em> then is the collection of observed values of a random sample, <span class="math inline">\(\vec{x}=x_1,\dots, x_n\)</span>.</p>
+<p>A <em>statistic</em> is a function of the random sample and is itself a random variable. An <em>estimator</em> is a statistic intended to estimate some parameter <span class="math inline">\(\theta\)</span> and may be denoted as <span class="math inline">\(W(\vec{X})=W\)</span>. Because an estimator is also a statistic, it is a random variable. An <em>estimate</em> is an observation of <span class="math inline">\(W\)</span> and is a numerical outcome of some function of the observed sample. An estimate may be denoted as <span class="math inline">\(W(\vec{x})=w\)</span> and calculated as a function of the observed sample.</p>
+<p>Properties of some estimator <span class="math inline">\(W\)</span> of <span class="math inline">\(\theta\)</span> are important for statistical inference. Ideally, <span class="math inline">\(E(W)=\theta\)</span> and <span class="math inline">\(Var(W)\)</span> is small. In some cases, we can derive the distribution of <span class="math inline">\(W\)</span> and use its properties to analytically calculate <span class="math inline">\(E(W)\)</span> and <span class="math inline">\(Var(W)\)</span>. In other cases, such analytical calculations are either untenable or the distribution of <span class="math inline">\(W\)</span> is unknown such that no calculations are possible.</p>
+<p>The Law of Large Numbers is useful here. Let <span class="math inline">\(W_i\)</span>, where <span class="math inline">\(i=1,\dots,n\)</span> be an estimator of <span class="math inline">\(\theta\)</span> and a statistic of some random sample <span class="math inline">\(\vec{X}_i=X_{i1},\dots,X_{im}\)</span>. As <span class="math inline">\(n\rightarrow \infty\)</span>,</p>
+<p><span class="math display">\[{1 \over n}\sum_{i=1}^{n}{W_i} = \bar{W}=E(W)\]</span></p>
+<p><span class="math display">\[\text{and}\]</span></p>
+<p><span class="math display">\[{1 \over {n-1}}\sum_{i=1}^{n}{\left(W_i-\bar{W}\right)^2}=S^2_W=Var(W)\]</span></p>
+<p>Essentially, the sample average of <span class="math inline">\(\vec{W}=W_1,\dots, W_n\)</span> is an estimator of <span class="math inline">\(E(W)\)</span> and the sample variance of <span class="math inline">\(\vec{W}\)</span> is an estimator of <span class="math inline">\(Var(W)\)</span>. As we mortals are unlikely to witness <span class="math inline">\(n\rightarrow \infty\)</span>, the quality of these estimates will be subject to size <span class="math inline">\(n\)</span>.</p>
+<p>Assuming we have values of <span class="math inline">\(E(W)\)</span> and <span class="math inline">\(Var(W)\)</span>, we can calculate two additional statistics to aid in our understanding of <span class="math inline">\(W\)</span>. These include bias and mean-squared-error (MSE). Bias tells us the accuracy of an estimator while MSE tells us the precision of an estimator and are calculated as follows:</p>
+<p><span class="math display">\[Bias(W) = E(W) - \theta\]</span></p>
+<p><span class="math display">\[MSE(W) = E\left\{(W-\theta)^2\right\} = Var(W) + \left\{Bias(W)^2\right\}\]</span></p>
+<p>Bias and MSE can be calculating from a random sample of <span class="math inline">\(W\)</span>. By the Law of Large Numbers, as <span class="math inline">\(n \rightarrow \infty\)</span>,</p>
+<p><span class="math display">\[{1 \over n} \sum^n_{i=1}{\left(W_i - \theta\right)}=\bar{W}-\theta=Bias(W)\]</span></p>
+<p><span class="math display">\[{1 \over {n-1}}\sum^n_{i=1}\left(W_i-\theta\right)^2= S^2_W+(\bar{W} -\theta)^2=MSE(W)\]</span></p>
+<p>Bias and MSE are random variables when estimated as a function of <span class="math inline">\(\vec{W}\)</span>. These estimates of bias and MSE will then require confidence intervals to account for their uncertainty.</p>
+<p>Simulation studies are focused on generating <span class="math inline">\(\vec{X}_i, \dots \vec{X}_n\)</span> and calculating <span class="math inline">\(\vec{W}\)</span> so that we may empirically derive the properties of <span class="math inline">\(W\)</span> when analytical solutions are untenable or unavailable. Understanding the generation of <span class="math inline">\(\vec{X}_i\)</span> is our next step.</p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="functionals.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="random-sampling-and-variate-generation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": null,
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://cdn.bootcss.com/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:" && /^https?:/.test(src))
+      src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
