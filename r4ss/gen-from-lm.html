@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="random-sampling-and-variate-generation.html">
-<link rel="next" href="multiple-replications-and-conditions.html">
+<link rel="prev" href="random.html">
+<link rel="next" href="gen-mult.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -102,6 +102,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="1" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
 <li class="chapter" data-level="1.1" data-path="intro.html"><a href="intro.html#statistics-review"><i class="fa fa-check"></i><b>1.1</b> Statistics review</a></li>
 <li class="chapter" data-level="1.2" data-path="intro.html"><a href="intro.html#simulation-studies"><i class="fa fa-check"></i><b>1.2</b> Simulation studies</a></li>
+<li class="chapter" data-level="1.3" data-path="intro.html"><a href="intro.html#r"><i class="fa fa-check"></i><b>1.3</b> R</a></li>
 </ul></li>
 <li class="part"><span><b>I R essentials</b></span></li>
 <li class="chapter" data-level="2" data-path="r-essentials-intro.html"><a href="r-essentials-intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
@@ -145,27 +146,27 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="7.3" data-path="functionals.html"><a href="functionals.html#exercises-5"><i class="fa fa-check"></i><b>7.3</b> Exercises</a></li>
 </ul></li>
 <li class="part"><span><b>II Data generation</b></span></li>
-<li class="chapter" data-level="8" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html"><i class="fa fa-check"></i><b>8</b> Random sampling and variate generation</a><ul>
-<li class="chapter" data-level="8.1" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#random-sampling-incomplete"><i class="fa fa-check"></i><b>8.1</b> Random sampling [INCOMPLETE]</a></li>
-<li class="chapter" data-level="8.2" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#univariate-random-samples-incomplete"><i class="fa fa-check"></i><b>8.2</b> Univariate random samples [INCOMPLETE]</a></li>
-<li class="chapter" data-level="8.3" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#multivariate-normal-samples-incomplete"><i class="fa fa-check"></i><b>8.3</b> Multivariate normal samples [INCOMPLETE]</a></li>
-<li class="chapter" data-level="8.4" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#pseudo-randomness-incomplete"><i class="fa fa-check"></i><b>8.4</b> Pseudo-randomness [INCOMPLETE]</a></li>
-<li class="chapter" data-level="8.5" data-path="random-sampling-and-variate-generation.html"><a href="random-sampling-and-variate-generation.html#exercises-6"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
+<li class="chapter" data-level="8" data-path="random.html"><a href="random.html"><i class="fa fa-check"></i><b>8</b> Random sampling and variate generation</a><ul>
+<li class="chapter" data-level="8.1" data-path="random.html"><a href="random.html#random-sampling-incomplete"><i class="fa fa-check"></i><b>8.1</b> Random sampling [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.2" data-path="random.html"><a href="random.html#univariate-random-samples-incomplete"><i class="fa fa-check"></i><b>8.2</b> Univariate random samples [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.3" data-path="random.html"><a href="random.html#multivariate-normal-samples-incomplete"><i class="fa fa-check"></i><b>8.3</b> Multivariate normal samples [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.4" data-path="random.html"><a href="random.html#pseudo-randomness-incomplete"><i class="fa fa-check"></i><b>8.4</b> Pseudo-randomness [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.5" data-path="random.html"><a href="random.html#exercises-6"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html"><i class="fa fa-check"></i><b>9</b> Generation from linear models</a><ul>
-<li class="chapter" data-level="9.1" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#linear-combination-review"><i class="fa fa-check"></i><b>9.1</b> Linear combination review</a></li>
-<li class="chapter" data-level="9.2" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#exogeneity-and-endogeneity"><i class="fa fa-check"></i><b>9.2</b> Exogeneity and endogeneity</a></li>
-<li class="chapter" data-level="9.3" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#general-procedure"><i class="fa fa-check"></i><b>9.3</b> General procedure</a></li>
-<li class="chapter" data-level="9.4" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#examples"><i class="fa fa-check"></i><b>9.4</b> Examples</a><ul>
-<li class="chapter" data-level="9.4.1" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#crt"><i class="fa fa-check"></i><b>9.4.1</b> CRT</a></li>
-<li class="chapter" data-level="9.4.2" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#correlated-outcomes"><i class="fa fa-check"></i><b>9.4.2</b> Correlated outcomes</a></li>
-<li class="chapter" data-level="9.4.3" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#mediation"><i class="fa fa-check"></i><b>9.4.3</b> Mediation</a></li>
-<li class="chapter" data-level="9.4.4" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#multilevel"><i class="fa fa-check"></i><b>9.4.4</b> Multilevel</a></li>
-<li class="chapter" data-level="9.4.5" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#sem"><i class="fa fa-check"></i><b>9.4.5</b> SEM</a></li>
+<li class="chapter" data-level="9" data-path="gen-from-lm.html"><a href="gen-from-lm.html"><i class="fa fa-check"></i><b>9</b> Generation from linear models</a><ul>
+<li class="chapter" data-level="9.1" data-path="gen-from-lm.html"><a href="gen-from-lm.html#linear-combination-review"><i class="fa fa-check"></i><b>9.1</b> Linear combination review</a></li>
+<li class="chapter" data-level="9.2" data-path="gen-from-lm.html"><a href="gen-from-lm.html#exogeneity-and-endogeneity"><i class="fa fa-check"></i><b>9.2</b> Exogeneity and endogeneity</a></li>
+<li class="chapter" data-level="9.3" data-path="gen-from-lm.html"><a href="gen-from-lm.html#general-procedure"><i class="fa fa-check"></i><b>9.3</b> General procedure</a></li>
+<li class="chapter" data-level="9.4" data-path="gen-from-lm.html"><a href="gen-from-lm.html#examples"><i class="fa fa-check"></i><b>9.4</b> Examples</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="gen-from-lm.html"><a href="gen-from-lm.html#crt"><i class="fa fa-check"></i><b>9.4.1</b> CRT</a></li>
+<li class="chapter" data-level="9.4.2" data-path="gen-from-lm.html"><a href="gen-from-lm.html#correlated-outcomes"><i class="fa fa-check"></i><b>9.4.2</b> Correlated outcomes</a></li>
+<li class="chapter" data-level="9.4.3" data-path="gen-from-lm.html"><a href="gen-from-lm.html#mediation"><i class="fa fa-check"></i><b>9.4.3</b> Mediation</a></li>
+<li class="chapter" data-level="9.4.4" data-path="gen-from-lm.html"><a href="gen-from-lm.html#multilevel"><i class="fa fa-check"></i><b>9.4.4</b> Multilevel</a></li>
+<li class="chapter" data-level="9.4.5" data-path="gen-from-lm.html"><a href="gen-from-lm.html#sem"><i class="fa fa-check"></i><b>9.4.5</b> SEM</a></li>
 </ul></li>
-<li class="chapter" data-level="9.5" data-path="generation-from-linear-models.html"><a href="generation-from-linear-models.html#exercises-7"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
+<li class="chapter" data-level="9.5" data-path="gen-from-lm.html"><a href="gen-from-lm.html#exercises-7"><i class="fa fa-check"></i><b>9.5</b> Exercises</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="multiple-replications-and-conditions.html"><a href="multiple-replications-and-conditions.html"><i class="fa fa-check"></i><b>10</b> Multiple replications and conditions</a></li>
+<li class="chapter" data-level="10" data-path="gen-mult.html"><a href="gen-mult.html"><i class="fa fa-check"></i><b>10</b> Multiple replications and conditions</a></li>
 </ul>
 
       </nav>
@@ -183,7 +184,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="generation-from-linear-models" class="section level1">
+<div id="gen_from_lm" class="section level1">
 <h1><span class="header-section-number">9</span> Generation from linear models</h1>
 <div id="linear-combination-review" class="section level2">
 <h2><span class="header-section-number">9.1</span> Linear combination review</h2>
@@ -233,8 +234,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           </div>
         </div>
       </div>
-<a href="random-sampling-and-variate-generation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="multiple-replications-and-conditions.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="random.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="gen-mult.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
