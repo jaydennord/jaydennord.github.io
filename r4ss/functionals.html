@@ -147,11 +147,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="part"><span><b>II Data generation</b></span></li>
 <li class="chapter" data-level="8" data-path="random.html"><a href="random.html"><i class="fa fa-check"></i><b>8</b> Random sampling and variate generation</a><ul>
-<li class="chapter" data-level="8.1" data-path="random.html"><a href="random.html#random-sampling-incomplete"><i class="fa fa-check"></i><b>8.1</b> Random sampling [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.1" data-path="random.html"><a href="random.html#pseudo-randomness"><i class="fa fa-check"></i><b>8.1</b> Pseudo-randomness</a></li>
 <li class="chapter" data-level="8.2" data-path="random.html"><a href="random.html#univariate-random-samples-incomplete"><i class="fa fa-check"></i><b>8.2</b> Univariate random samples [INCOMPLETE]</a></li>
 <li class="chapter" data-level="8.3" data-path="random.html"><a href="random.html#multivariate-normal-samples-incomplete"><i class="fa fa-check"></i><b>8.3</b> Multivariate normal samples [INCOMPLETE]</a></li>
-<li class="chapter" data-level="8.4" data-path="random.html"><a href="random.html#pseudo-randomness-incomplete"><i class="fa fa-check"></i><b>8.4</b> Pseudo-randomness [INCOMPLETE]</a></li>
-<li class="chapter" data-level="8.5" data-path="random.html"><a href="random.html#exercises-6"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
+<li class="chapter" data-level="8.4" data-path="random.html"><a href="random.html#exercises-6"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="gen-from-lm.html"><a href="gen-from-lm.html"><i class="fa fa-check"></i><b>9</b> Generation from linear models</a><ul>
 <li class="chapter" data-level="9.1" data-path="gen-from-lm.html"><a href="gen-from-lm.html#linear-combination-review"><i class="fa fa-check"></i><b>9.1</b> Linear combination review</a></li>
@@ -239,7 +238,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 )
 x &lt;-<span class="st"> </span><span class="kw">matrix</span>(x, <span class="dt">nrow =</span> <span class="dv">5</span>, <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>Recreate <code>x</code> using sequences and <code>replicate</code>.</p></li>
-<li><p>Consider the following code block involving matrix multiplication.</p>
+<li><p><del>Consider the following code block involving matrix multiplication.</del></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dt">ncol =</span> <span class="dv">2</span>)
 b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">3</span>, <span class="dv">8</span>, <span class="dv">9</span>, <span class="dv">3</span>, <span class="dv">4</span>), <span class="dt">ncol =</span> <span class="dv">2</span>)
 
@@ -251,7 +250,18 @@ b <span class="op">%*%</span><span class="st"> </span>a
 <span class="co">#&gt; [1,]   23   51</span>
 <span class="co">#&gt; [2,]    9   21</span>
 <span class="co">#&gt; [3,]   16   40</span></code></pre></div>
-<p>Using <code>vapply</code>, create a function <code>mm</code> to mimic <code>%*%</code> wihtout using <code>%*%</code>.</p></li>
+<p><del>Using <code>vapply</code>, create a function <code>mm</code> to mimic <code>%*%</code> wihtout using <code>%*%</code>.</del></p></li>
+<li><p>Consider the following matrices already contained in a list (helpful).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lst &lt;-<span class="st"> </span><span class="kw">list</span>(
+  a &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">4</span>, <span class="dv">3</span>, <span class="dv">9</span>), <span class="dt">nrow =</span> <span class="dv">2</span>),
+  b &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">9</span>, <span class="dv">1</span>, <span class="dv">2</span>), <span class="dt">nrow =</span> <span class="dv">2</span>),
+  c &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">10</span>, <span class="dv">4</span>, <span class="dv">3</span>), <span class="dt">nrow =</span> <span class="dv">2</span>)
+)</code></pre></div>
+<ol style="list-style-type: lower-alpha">
+<li>Recreate <code>lst</code> using a functional.</li>
+<li>Use a functional or functionals to create a <span class="math inline">\(2\times 2\)</span> matrix where each element is the average of the corresponding elements in the three matrices of <code>lst</code>.</li>
+</ol></li>
+<li><p>Recreate the <code>Map()</code> function without using <code>Map()</code>, <code>mapply()</code>, or any function from <code>purrr</code>.</p></li>
 </ol>
 
 </div>

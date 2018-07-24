@@ -147,11 +147,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </ul></li>
 <li class="part"><span><b>II Data generation</b></span></li>
 <li class="chapter" data-level="8" data-path="random.html"><a href="random.html"><i class="fa fa-check"></i><b>8</b> Random sampling and variate generation</a><ul>
-<li class="chapter" data-level="8.1" data-path="random.html"><a href="random.html#random-sampling-incomplete"><i class="fa fa-check"></i><b>8.1</b> Random sampling [INCOMPLETE]</a></li>
+<li class="chapter" data-level="8.1" data-path="random.html"><a href="random.html#pseudo-randomness"><i class="fa fa-check"></i><b>8.1</b> Pseudo-randomness</a></li>
 <li class="chapter" data-level="8.2" data-path="random.html"><a href="random.html#univariate-random-samples-incomplete"><i class="fa fa-check"></i><b>8.2</b> Univariate random samples [INCOMPLETE]</a></li>
 <li class="chapter" data-level="8.3" data-path="random.html"><a href="random.html#multivariate-normal-samples-incomplete"><i class="fa fa-check"></i><b>8.3</b> Multivariate normal samples [INCOMPLETE]</a></li>
-<li class="chapter" data-level="8.4" data-path="random.html"><a href="random.html#pseudo-randomness-incomplete"><i class="fa fa-check"></i><b>8.4</b> Pseudo-randomness [INCOMPLETE]</a></li>
-<li class="chapter" data-level="8.5" data-path="random.html"><a href="random.html#exercises-6"><i class="fa fa-check"></i><b>8.5</b> Exercises</a></li>
+<li class="chapter" data-level="8.4" data-path="random.html"><a href="random.html#exercises-6"><i class="fa fa-check"></i><b>8.4</b> Exercises</a></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="gen-from-lm.html"><a href="gen-from-lm.html"><i class="fa fa-check"></i><b>9</b> Generation from linear models</a><ul>
 <li class="chapter" data-level="9.1" data-path="gen-from-lm.html"><a href="gen-from-lm.html#linear-combination-review"><i class="fa fa-check"></i><b>9.1</b> Linear combination review</a></li>
@@ -186,13 +185,68 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="random" class="section level1">
 <h1><span class="header-section-number">8</span> Random sampling and variate generation</h1>
-<div id="random-sampling-incomplete" class="section level2">
-<h2><span class="header-section-number">8.1</span> Random sampling [INCOMPLETE]</h2>
-<p><code>sample()</code></p>
+<p>In the <a href="intro.html#statistics-review">Introduction</a> to this book.</p>
+<ul>
+<li>obtain sample of estimators</li>
+<li>sample depends on “sample” of randomly generated data</li>
+<li>we need to know how to randomly generate data</li>
+</ul>
+<div id="pseudo-randomness" class="section level2">
+<h2><span class="header-section-number">8.1</span> Pseudo-randomness</h2>
+<p>Computers cannot generate truly random numbers. Instead, complex algorithms mimic randomness to produce <em>pseudo-random numbers</em>. These algorithms begin with an arbitrary starting value or <em>seed</em> that updates with each generated number. Unless otherwise specified, the seed is often based on the internal clock of the computer’s processor.</p>
+<p>The use of an algorithm makes pseudo-randomness predictable and reproducible. If one writes a program and provides a fixed value for the seed, then the program will return the same results on repeated runs. All random number generation scripts should begin with setting the seed.</p>
+<p>In R, setting the seed is accomplished with the <code>set.seed()</code> function that takes an arbitrary number as its argument. In the next codeblock, the <code>runif()</code> function is used to generate a random number between 0 and 1. Note that if you run this code in your own R session, the first instance of <code>runif()</code> will return a different result. When the same seed is invoked, however, the second <code>runif()</code> will return the same result as below.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>)
+<span class="co">#&gt; [1] 0.4916358</span>
+
+<span class="kw">set.seed</span>(<span class="dv">12479</span>)
+<span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>)
+<span class="co">#&gt; [1] 0.1121074</span></code></pre></div>
+<p>Pending an investigation of cyclical relationships among generated values, the seed needs to be set only once.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># one run</span>
+<span class="kw">set.seed</span>(<span class="dv">12479</span>)
+
+x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">5</span>)
+
+y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">5</span>)
+
+x; y
+<span class="co">#&gt; [1] 0.1121074 0.7750140 0.4247088 0.8604614 0.9952807</span>
+<span class="co">#&gt; [1] 0.31230762 0.06263094 0.64284741 0.59751066 0.52157322</span>
+
+<span class="co"># another run that produces the same results</span>
+<span class="kw">set.seed</span>(<span class="dv">12479</span>)
+
+x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">5</span>)
+
+y &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">5</span>)
+
+x; y
+<span class="co">#&gt; [1] 0.1121074 0.7750140 0.4247088 0.8604614 0.9952807</span>
+<span class="co">#&gt; [1] 0.31230762 0.06263094 0.64284741 0.59751066 0.52157322</span></code></pre></div>
+<p>Remember that the random number generation algorithm updates each time it is used to generate a value. This is illustrated below. The first run uses the random number generator to produce two random numbers with seed <code>12345</code>. In the subsequent run, the seed is reset to <code>12345</code> and two separate <code>runif()</code> functions generate two random numbers. The values are equivalent to the first run; the same seed was used, the same generating function was used, and a random number was requested twice.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># first run</span>
+<span class="kw">set.seed</span>(<span class="dv">12345</span>)
+
+<span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">2</span>)
+<span class="co">#&gt; [1] 0.7209039 0.8757732</span>
+
+<span class="co"># reset</span>
+<span class="kw">set.seed</span>(<span class="dv">12345</span>)
+
+<span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>)
+<span class="co">#&gt; [1] 0.7209039</span>
+
+<span class="kw">runif</span>(<span class="dt">n =</span> <span class="dv">1</span>)
+<span class="co">#&gt; [1] 0.8757732</span></code></pre></div>
 </div>
 <div id="univariate-random-samples-incomplete" class="section level2">
 <h2><span class="header-section-number">8.2</span> Univariate random samples [INCOMPLETE]</h2>
+<p><code>sample()</code></p>
 <p>For many distributions, R provides functions for density, cumulative distribution functions, quantile functions, and random generation. These functions are of the form <code>dxxx</code>, <code>pxxx</code>, <code>qxxx</code>, and <code>rxxx</code>. We are more interested in the random generation functions <code>rxxx</code>. See <code>help(Distributions)</code> for a full list.</p>
+<ul>
+<li>vectorization of <code>rxxx</code> functions.</li>
+</ul>
 </div>
 <div id="multivariate-normal-samples-incomplete" class="section level2">
 <h2><span class="header-section-number">8.3</span> Multivariate normal samples [INCOMPLETE]</h2>
@@ -236,13 +290,14 @@ x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt"
 <span class="co">#&gt; [3,] -0.02573531 0.09375714  9.92934666</span></code></pre></div>
 <p>The sample covariance matrix is roughly equivalent to the population covariance matrix <code>Sigma</code> as expected. The sample mean vector is also roughly equivalent to the population mean vector as expected. It appears that <code>MASS::mvrnorm</code> is simpler than the <code>chol</code> method. The <code>chol</code> method, however, will be useful for generating normally distributed data with additional skew and kurtosis.</p>
 </div>
-<div id="pseudo-randomness-incomplete" class="section level2">
-<h2><span class="header-section-number">8.4</span> Pseudo-randomness [INCOMPLETE]</h2>
-<p>Computer programs used for random sample generation do not produce truly random values. Instead, complex algorithms mimic randomness to produce <em>pseudo-random numbers</em>. These algorithms begin with an arbitrary starting value, or <em>seed</em>, that updates with each generated values. Unless otherwise specified, the seed is based on the internal clock of the computer’s processor. (need to fact check that statement)</p>
-<p>Pseudo-randomness for simulation studies has the advantage of reproducibility. If one writes a program and provides a fixed value for the seed, then the program will return the same results on every run.</p>
-</div>
 <div id="exercises-6" class="section level2">
-<h2><span class="header-section-number">8.5</span> Exercises</h2>
+<h2><span class="header-section-number">8.4</span> Exercises</h2>
+<p>Use <code>set.seed()</code> for these exercises for reproducible results.</p>
+<ol style="list-style-type: decimal">
+<li><p>Suppose we have <span class="math inline">\(X_1, \dots, X_{20}\)</span> such that <span class="math inline">\(X_i \sim Bernoulli(p_i)\)</span> and <span class="math inline">\(p_i \sim Beta(2, 3)\)</span>. Note that the Bernoulli distribution results in 0 or 1 and the <span class="math inline">\(p\)</span> parameter ranges between 0 and 1. Meanwhile, the Beta distribution ranges between 0 and 1. Generate the random sample <span class="math inline">\(X_i, \dots, X_{20}\)</span>. Hint: The Bernoulli distribution is a special case of the Binomial distribution, so <code>rbinom()</code> may be used.</p></li>
+<li><p>Generate a random sample <span class="math inline">\(X_1, \dots X_{100}\)</span> such that <span class="math inline">\(X_i \sim N(10, 3)\)</span>. Then, randomly assign data in this sample to be missing such that each case has a 5% chance of being missing. Hint: <code>sample()</code>, <code>runif()</code>, or <code>rbinom()</code> may be used for solving the missingness portion. Hint 2: Remember logical indexing.</p></li>
+<li><p>Randomly generate a sample of size 100 with three variables that have the following characteristics. <span class="math inline">\(X\)</span> has variance 5, <span class="math inline">\(Y\)</span> has variance 3, <span class="math inline">\(Z\)</span> has variance 2, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are correlated .3, and <span class="math inline">\(Z\)</span> is uncorrelated with the other variables. All variables have means of 0. Confirm your generation with <code>cov()</code> and <code>cor()</code>.</p></li>
+</ol>
 
 </div>
 </div>
