@@ -295,7 +295,13 @@ x &lt;-<span class="st"> </span><span class="kw">mvrnorm</span>(<span class="dt"
 <p>Use <code>set.seed()</code> for these exercises for reproducible results.</p>
 <ol style="list-style-type: decimal">
 <li><p>Suppose we have <span class="math inline">\(X_1, \dots, X_{20}\)</span> such that <span class="math inline">\(X_i \sim Bernoulli(p_i)\)</span> and <span class="math inline">\(p_i \sim Beta(2, 3)\)</span>. Note that the Bernoulli distribution results in 0 or 1 and the <span class="math inline">\(p\)</span> parameter ranges between 0 and 1. Meanwhile, the Beta distribution ranges between 0 and 1. Generate the random sample <span class="math inline">\(X_i, \dots, X_{20}\)</span>. Hint: The Bernoulli distribution is a special case of the Binomial distribution, so <code>rbinom()</code> may be used.</p></li>
-<li><p>Generate a random sample <span class="math inline">\(X_1, \dots X_{100}\)</span> such that <span class="math inline">\(X_i \sim N(10, 3)\)</span>. Then, randomly assign data in this sample to be missing such that each case has a 5% chance of being missing. Hint: <code>sample()</code>, <code>runif()</code>, or <code>rbinom()</code> may be used for solving the missingness portion. Hint 2: Remember logical indexing.</p></li>
+<li>Generate a random sample <span class="math inline">\(X_1, \dots X_{100}\)</span> such that <span class="math inline">\(X_i \sim N(10, 3)\)</span>. Then, randomly assign data in this sample to be missing such that each case has a 5% chance of being missing. Impose missingness in three ways with:
+<ol style="list-style-type: lower-alpha">
+<li><code>sample()</code></li>
+<li><code>rbinom()</code></li>
+<li><code>runif()</code></li>
+</ol>
+<p>Hint: Remember logical indexing.</p></li>
 <li><p>Randomly generate a sample of size 100 with three variables that have the following characteristics. <span class="math inline">\(X\)</span> has variance 5, <span class="math inline">\(Y\)</span> has variance 3, <span class="math inline">\(Z\)</span> has variance 2, <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> are correlated .3, and <span class="math inline">\(Z\)</span> is uncorrelated with the other variables. All variables have means of 0. Confirm your generation with <code>cov()</code> and <code>cor()</code>.</p></li>
 </ol>
 
