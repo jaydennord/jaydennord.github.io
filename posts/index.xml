@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Jayden Nord</title>
+    <link>http://jaydennord.github.io/posts/</link>
+    <description>Recent content in Posts on Jayden Nord</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>© 2019 — All rights reserved.</copyright>
+    <lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://jaydennord.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Contrast scaling</title>
+      <link>http://jaydennord.github.io/posts/2019/03/contrast-scaling/</link>
+      <pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://jaydennord.github.io/posts/2019/03/contrast-scaling/</guid>
+      <description>Using a publicly available auto dataset, students were asked to set up contrasts to estimate the difference between American and foreign (European and Japenese) cars&amp;rsquo; miles-per-gallon (mpg) and the difference between European and Japanese cars&amp;rsquo; mpg. The data are read into R with the code below. The variable &amp;ldquo;origin&amp;rdquo; is explicitly converted into a categorical variable from a numeric. The variable &amp;ldquo;name&amp;rdquo; is removed to simplify the appearance of the data.</description>
+    </item>
+    
+  </channel>
+</rss>

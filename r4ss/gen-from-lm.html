@@ -187,13 +187,16 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <h1><span class="header-section-number">9</span> Generation from linear models</h1>
 <div id="linear-combination-review" class="section level2">
 <h2><span class="header-section-number">9.1</span> Linear combination review</h2>
+<p>This here is a vector: <span class="math inline">\(\underline{b}\)</span>. It has an underline to show that it is a vector.</p>
+<p><span class="math inline">\(\mathbf{\underline{b}}\)</span></p>
+<p><span class="math inline">\(\underline{\mathbf{b}}\)</span></p>
 <p>Some facts about linear combinations reviewed</p>
 <p>Let <span class="math inline">\(\mathbf{X}\)</span> be a <span class="math inline">\(n\times p\)</span> matrix of <span class="math inline">\(n\)</span> random samples of <span class="math inline">\(X_1, \dots, X_p\)</span>. Let <span class="math inline">\(\mathbf{b}\)</span> be a <span class="math inline">\(p \times 1\)</span> vector of coefficients and let <span class="math inline">\(\vec{Y}\)</span> be a <span class="math inline">\(n \times 1\)</span> linear combination of <span class="math inline">\(\mathbf{X}\)</span> such that</p>
 <p><span class="math display">\[\vec{Y} = \mathbf{X}\mathbf{b}\]</span></p>
 <p>Then,</p>
 <p><span class="math display">\[E(Y) = E(\mathbf{X})&#39; \mathbf{b}\]</span></p>
 <p><span class="math display">\[\text{and}\]</span></p>
-<p><span class="math display">\[Var(Y) = \mathbf{b}&#39;Cov(\mathbf{X})\mathbf{b} = \mathbf{b}&#39;\mathbf{\Sigma}\mathbf{b}\]</span> Readers may be more familiar with the case of two predictors <span class="math inline">\({X}_1\)</span> and <span class="math inline">\({X}_2\)</span> and two coefficients <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> in which</p>
+<p><span class="math display">\[Var(Y) = \mathbf{b}&#39;Cov(\mathbf{X})\mathbf{b} = \mathbf{\underline{b}}&#39;\mathbf{\Sigma}\mathbf{\underline{b}}\]</span> Readers may be more familiar with the case of two predictors <span class="math inline">\({X}_1\)</span> and <span class="math inline">\({X}_2\)</span> and two coefficients <span class="math inline">\(b_1\)</span> and <span class="math inline">\(b_2\)</span> in which</p>
 <p><span class="math display">\[E(Y) = b_1 E(X_1) + b_2 E(X_2)\]</span></p>
 <p><span class="math display">\[\text{and}\]</span></p>
 <p><span class="math display">\[Var(Y) = b_1^2 Var(X_1) + b_2^2 Var(X_2) + 2 b_1 b_2 Cov(X_1, X_2)\]</span></p>
