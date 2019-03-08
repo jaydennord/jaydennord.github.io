@@ -7,9 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2019 — All rights reserved.</copyright>
+    <lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://jaydennord.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>General Linear Modeling</title>
+      <link>http://jaydennord.github.io/tags/general-linear-modeling/</link>
+      <pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://jaydennord.github.io/tags/general-linear-modeling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R</title>
+      <link>http://jaydennord.github.io/tags/r/</link>
+      <pubDate>Sun, 03 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://jaydennord.github.io/tags/r/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

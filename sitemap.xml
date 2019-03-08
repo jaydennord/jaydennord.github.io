@@ -8,16 +8,14 @@
   </url>
   
   <url>
-    <loc>http://jaydennord.github.io/about/</loc>
-  </url>
-  
-  <url>
     <loc>http://jaydennord.github.io/categories/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>http://jaydennord.github.io/contact/</loc>
+    <loc>http://jaydennord.github.io/tags/general-linear-modeling/</loc>
+    <lastmod>2019-03-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -27,7 +25,14 @@
   </url>
   
   <url>
+    <loc>http://jaydennord.github.io/tags/r/</loc>
+    <lastmod>2019-03-03T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://jaydennord.github.io/tags/</loc>
+    <lastmod>2019-03-03T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

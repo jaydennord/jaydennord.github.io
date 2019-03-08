@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Welcome on Jayden Nord</title>
-    <link>http://jaydennord.github.io/</link>
-    <description>Recent content in Welcome on Jayden Nord</description>
+    <title>R on Jayden Nord</title>
+    <link>http://jaydennord.github.io/tags/r/</link>
+    <description>Recent content in R on Jayden Nord</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2019 — All rights reserved.</copyright>
     <lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://jaydennord.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://jaydennord.github.io/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
