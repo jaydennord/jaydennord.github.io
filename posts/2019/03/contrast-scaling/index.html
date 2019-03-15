@@ -61,27 +61,25 @@ MathJax.Hub.Config({
 </div>
 </header>
 <article>
-    <p>Using a <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/">publicly available auto dataset</a>, students were asked to set up contrasts to estimate the difference between American and foreign (European and Japenese) cars&rsquo; miles-per-gallon (mpg) and the difference between European and Japanese cars&rsquo; mpg. The data are read into R with the code below. The variable &ldquo;origin&rdquo; is explicitly converted into a categorical variable from a numeric. The variable &ldquo;name&rdquo; is removed to simplify the appearance of the data.</p>
+    <p>Using a <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/">publicly available auto dataset</a>, students were asked to set up contrasts to estimate the difference between American and foreign (European and Japenese) cars&rsquo; miles-per-gallon (mpg) and the difference between European and Japanese cars&rsquo; mpg. The data are read into R with the code below. Then, the variable &ldquo;origin&rdquo; is explicitly converted into a categorical variable from a numeric.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">d <span style="color:#666">&lt;-</span> read.table(
-  <span style="color:#4070a0">&#34;https://raw.githubusercontent.com/jaydennord/data/master/auto.dat&#34;</span>,
-  header <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>, 
+  <span style="color:#4070a0">&#34;https://raw.githubusercontent.com/jaydennord/data/master/auto.csv&#34;</span>,
   as.is  <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>
-)
+)[, <span style="color:#4070a0">&#34;mpg&#34;</span>, <span style="color:#4070a0">&#34;origin&#34;</span>]
 
 d <span style="color:#666">&lt;-</span> <span style="color:#007020">transform</span>(
   d, 
-  origin <span style="color:#666">=</span> <span style="color:#007020">factor</span>(origin, <span style="color:#40a070">1</span><span style="color:#666">:</span><span style="color:#40a070">3</span>, <span style="color:#902000">c</span>(<span style="color:#4070a0">&#34;American&#34;</span>, <span style="color:#4070a0">&#34;European&#34;</span>, <span style="color:#4070a0">&#34;Japanese&#34;</span>)),
-  name <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">NULL</span>
+  origin <span style="color:#666">=</span> <span style="color:#007020">factor</span>(origin, <span style="color:#40a070">1</span><span style="color:#666">:</span><span style="color:#40a070">3</span>, <span style="color:#902000">c</span>(<span style="color:#4070a0">&#34;American&#34;</span>, <span style="color:#4070a0">&#34;European&#34;</span>, <span style="color:#4070a0">&#34;Japanese&#34;</span>))
 )
 
 <span style="color:#007020">head</span>(d)
-<span style="color:#60a0b0;font-style:italic">##   mpg cyl disp horse weight accel year   origin</span>
-<span style="color:#60a0b0;font-style:italic">## 1  18   8  307   130   3504  12.0   70 American</span>
-<span style="color:#60a0b0;font-style:italic">## 2  15   8  350   165   3693  11.5   70 American</span>
-<span style="color:#60a0b0;font-style:italic">## 3  18   8  318   150   3436  11.0   70 American</span>
-<span style="color:#60a0b0;font-style:italic">## 4  16   8  304   150   3433  12.0   70 American</span>
-<span style="color:#60a0b0;font-style:italic">## 5  17   8  302   140   3449  10.5   70 American</span>
-<span style="color:#60a0b0;font-style:italic">## 6  15   8  429   198   4341  10.0   70 American</span></code></pre></div>
+<span style="color:#60a0b0;font-style:italic">##   mpg   origin</span>
+<span style="color:#60a0b0;font-style:italic">## 1  18 American</span>
+<span style="color:#60a0b0;font-style:italic">## 2  15 American</span>
+<span style="color:#60a0b0;font-style:italic">## 3  18 American</span>
+<span style="color:#60a0b0;font-style:italic">## 4  16 American</span>
+<span style="color:#60a0b0;font-style:italic">## 5  17 American</span>
+<span style="color:#60a0b0;font-style:italic">## 6  15 American</span></code></pre></div>
 <p>Before implementing contrasts, I want to fit a simple dummy-coded version of mpg regressed on origin. Using the resulting model, model-estimated means for each country of origin are calculated. 95% confidence intervals are printed along with the estimate. These are needed for future illustration.</p>
 <div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#60a0b0;font-style:italic"># model fitting</span>
 fit <span style="color:#666">&lt;-</span> lm(mpg <span style="color:#666">~</span> origin, data <span style="color:#666">=</span> d)
