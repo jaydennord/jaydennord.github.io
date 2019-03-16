@@ -62,7 +62,7 @@ MathJax.Hub.Config({
 </header>
 <article>
     <p>Using a <a href="https://archive.ics.uci.edu/ml/machine-learning-databases/auto-mpg/">publicly available auto dataset</a>, students were asked to set up contrasts to estimate the difference between American and foreign (European and Japenese) cars&rsquo; miles-per-gallon (mpg) and the difference between European and Japanese cars&rsquo; mpg. The data are read into R with the code below. Then, the variable &ldquo;origin&rdquo; is explicitly converted into a categorical variable from a numeric.</p>
-<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">d <span style="color:#666">&lt;-</span> read.table(
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">d <span style="color:#666">&lt;-</span> read.csv(
   <span style="color:#4070a0">&#34;https://raw.githubusercontent.com/jaydennord/data/master/auto.csv&#34;</span>,
   as.is  <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>
 )[, <span style="color:#4070a0">&#34;mpg&#34;</span>, <span style="color:#4070a0">&#34;origin&#34;</span>]

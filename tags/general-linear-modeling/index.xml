@@ -19,7 +19,7 @@
       
       <guid>http://jaydennord.github.io/posts/2019/03/contrast-scaling/</guid>
       <description>Using a publicly available auto dataset, students were asked to set up contrasts to estimate the difference between American and foreign (European and Japenese) cars&amp;rsquo; miles-per-gallon (mpg) and the difference between European and Japanese cars&amp;rsquo; mpg. The data are read into R with the code below. Then, the variable &amp;ldquo;origin&amp;rdquo; is explicitly converted into a categorical variable from a numeric.
-d &amp;lt;- read.table( &amp;#34;https://raw.githubusercontent.com/jaydennord/data/master/auto.csv&amp;#34;, as.is = TRUE )[, &amp;#34;mpg&amp;#34;, &amp;#34;origin&amp;#34;] d &amp;lt;- transform( d, origin = factor(origin, 1:3, c(&amp;#34;American&amp;#34;, &amp;#34;European&amp;#34;, &amp;#34;Japanese&amp;#34;)) ) head(d) ## mpg origin ## 1 18 American ## 2 15 American ## 3 18 American ## 4 16 American ## 5 17 American ## 6 15 American Before implementing contrasts, I want to fit a simple dummy-coded version of mpg regressed on origin.</description>
+d &amp;lt;- read.csv( &amp;#34;https://raw.githubusercontent.com/jaydennord/data/master/auto.csv&amp;#34;, as.is = TRUE )[, &amp;#34;mpg&amp;#34;, &amp;#34;origin&amp;#34;] d &amp;lt;- transform( d, origin = factor(origin, 1:3, c(&amp;#34;American&amp;#34;, &amp;#34;European&amp;#34;, &amp;#34;Japanese&amp;#34;)) ) head(d) ## mpg origin ## 1 18 American ## 2 15 American ## 3 18 American ## 4 16 American ## 5 17 American ## 6 15 American Before implementing contrasts, I want to fit a simple dummy-coded version of mpg regressed on origin.</description>
     </item>
     
   </channel>
