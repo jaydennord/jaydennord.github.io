@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2019 — All rights reserved.</copyright>
-    <lastBuildDate>Sun, 03 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 16 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://jaydennord.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Measurement error in SEM</title>
+      <link>http://jaydennord.github.io/posts/2019/03/measurement-error-in-sem/</link>
+      <pubDate>Sat, 16 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://jaydennord.github.io/posts/2019/03/measurement-error-in-sem/</guid>
+      <description>Suppose we wanted to fit the following model below using health data from Hoffman and Fidell (1979). The observed variables are
+ age - age bracket of the participant scstress - stress measure rescaled to help SEM estimation esteem - self-esteem measurement attmar - satisfaction with marital status control - locus of control measurement  The diagram can be expressed formulaically:
+ $$ \begin{align*} \text{age} &amp; = \lambda_1 \text{(age_f)} + e_1 \\ \text{scstress} &amp; = \lambda_2 \text{(stresss_f)} + e_2 \\ \text{esteem} &amp; = \lambda_3 \text{(self)} + e_3 \\ \text{attmar} &amp; = \lambda_4 \text{(self)} + e_4 \\ \text{control} &amp; = \lambda_5 \text{(self)} + e_5 \end{align*} $$  The observed measures are linear combinations of latent factors and residuals, which are sometimes interpreted as measurement error.</description>
+    </item>
     
     <item>
       <title>Contrast scaling</title>

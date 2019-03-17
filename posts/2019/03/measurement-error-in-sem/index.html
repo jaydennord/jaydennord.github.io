@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html>
+
+<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [['$','$'], ['\\(','\\)']],
+    displayMath: [['$$','$$'], ['\[','\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+    TeX: { equationNumbers: { autoNumber: "AMS" },
+         extensions: ["AMSmath.js", "AMSsymbols.js"] }
+  }
+});
+</script>
+
+
+
+
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Measurement error in SEM | Jayden Nord</title>
+
+    <style>body{background-color:#d3d3d3;margin:0}#sub_body{background-color:#fff;margin:0 auto;max-width:650px;line-height:1.6;font-size:18px;color:#444;padding:29px 40px}pre{max-width:650px;overflow:auto;padding:5px;font-size:16px}code{font-size:16px}h1,h2,h3{line-height:1.2}div.header h1{padding-top:0;padding-bottom:8px;margin-bottom:24px;font-size:18px;font-weight:400;border-bottom:1px solid}.header-menu{float:right}ul.pagination{list-style-type:none;text-align:center;padding:0}ul.pagination>li{padding:0 8px;display:inline-block}div.footer{border-top:1px solid;text-align:center}img{max-width:100%;max-height:100%;display:block;margin-left:auto;margin-right:auto}</style>
+
+    
+</head>
+
+<body>
+<div id="sub_body">
+<div class="header">
+    <h1>
+        <a href="/">Jayden Nord</a>
+        <div class="header-menu">
+            <a href="/posts/">posts</a>
+        </div>
+    </h1>
+</div>
+<div id="content">
+
+<header>
+    <h1>Measurement error in SEM</h1>
+    
+
+<div class="post-meta">
+    Date &#x5b;
+    <time datetime="2019-03-16">Mar 16, 2019</time>
+    &#x5d;
+    Tags &#x5b;
+    <a href="http://jaydennord.github.io/tags/r/">R</a>
+    <a href="http://jaydennord.github.io/tags/sem/">sem</a>
+    &#x5d;
+</div>
+</header>
+<article>
+    <p>Suppose we wanted to fit the following model below using health data from
+Hoffman and Fidell (1979). The observed variables are</p>
+
+<ul>
+<li>age - age bracket of the participant</li>
+<li>scstress - stress measure rescaled to help SEM estimation</li>
+<li>esteem - self-esteem measurement</li>
+<li>attmar - satisfaction with marital status</li>
+<li>control - locus of control measurement</li>
+</ul>
+
+<p><img src="/fig/2019-03-16_01.png" alt="" /><!-- --></p>
+
+<p>The diagram can be expressed formulaically:</p>
+
+<div>
+$$
+\begin{align*}
+\text{age} & = \lambda_1 \text{(age_f)} + e_1 \\
+\text{scstress} & = \lambda_2 \text{(stresss_f)} + e_2 \\
+\text{esteem} & = \lambda_3 \text{(self)} + e_3 \\
+\text{attmar} & = \lambda_4 \text{(self)} + e_4 \\
+\text{control} & = \lambda_5 \text{(self)} + e_5
+\end{align*}
+$$
+</div>
+
+<p>The observed measures are linear combinations of latent factors and residuals, which are sometimes interpreted as measurement error. If we assume <code>age</code> is a perfect measure of <code>age_f</code> (the true age), then the reliability of the measure is 100% and the variance of $e_1$ to be 0. For identification, we can fix $\lambda_1$ to 1, in which case the latent factor will inherit the variance of <code>age</code>. Otherwise, we can fix the variance of <code>age_f</code> to 1, in which case $\lambda_1$ will be the estimated standard deviation of <code>age</code>.</p>
+
+<p>These consequences can be determined from the calculation of the variance of a linear combination of variables. For example, suppose $Y = aX_1 + bX_2$. Thus, $\text{Var}(Y) = a^2\text{Var}\left(X_1\right) + b^2\text{Var}\left(X_2\right) + ab\text{Cov}\left(X_1, X_2\right)$.</p>
+
+<p>Perhaps we have determined that the reliability of our stress measure is 90%. Thus, 90% of the variability of <code>scstress</code> is attributed to <code>stress_f</code> and 10% of the variability is attributed to $e_2$. So,</p>
+
+<div>
+$$
+\begin{align*}
+\text{Var(scstress)} & = \lambda_2^2\text{Var(stress_f)} + \text{Var}\left(e_2\right) \\
+1 & =  \lambda_2^2 {\text{Var(stress_f)} \over \text{Var(scstress)}} + {{\text{Var}\left(e_2\right)}\over{\text{Var(stress_f)}}}
+\end{align*}
+$$
+</div>
+
+<p>and</p>
+
+<div>
+$$
+\begin{align*}
+.90 & = \lambda_2^2 {\text{Var(stress_f)} \over \text{Var(scstress)}} \\
+.10 & = {{\text{Var}\left(e_2\right)}\over{\text{Var(scstress)}}}
+\end{align*}
+$$
+</div>
+
+<p>There are two modelling approaches for determining $\lambda^2_2$ (assuming $\text{Var(scstress)}$ is set to 1), which I will call the <em>two-step</em> and <em>one-step</em> approaches. I believe that the two-step approach is the most common. In the two-step approach, the sample variance for <code>scstress</code> is used for $\text{Var(scstress)}$. Below is the syntax used to estimate the model of interest with the two-step approach.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#60a0b0;font-style:italic"># required packages</span>
+<span style="color:#007020;font-weight:bold">library</span>(tidyverse)
+<span style="color:#007020;font-weight:bold">library</span>(lavaan)
+<span style="color:#007020;font-weight:bold">library</span>(semPlot)
+
+<span style="color:#60a0b0;font-style:italic"># health data</span>
+d <span style="color:#666">&lt;-</span> read_csv(
+  <span style="color:#4070a0">&#34;https://raw.githubusercontent.com/jaydennord/data/master/health.csv&#34;</span>
+)
+
+<span style="color:#60a0b0;font-style:italic"># estimated variance of scstress</span>
+var(d<span style="color:#666">$</span>scstress)
+<span style="color:#60a0b0;font-style:italic">## [1] 1.681464</span>
+
+<span style="color:#60a0b0;font-style:italic"># lambda_2</span>
+<span style="color:#007020">sqrt</span>(<span style="color:#40a070">.90</span> <span style="color:#666">*</span> var(d<span style="color:#666">$</span>scstress))
+<span style="color:#60a0b0;font-style:italic">## [1] 1.23017</span>
+<span style="color:#40a070">.10</span> <span style="color:#666">*</span> var(d<span style="color:#666">$</span>scstress)
+<span style="color:#60a0b0;font-style:italic">## [1] 0.1681464</span>
+
+mod <span style="color:#666">&lt;-</span> <span style="color:#4070a0">&#39;
+</span><span style="color:#4070a0"># model
+</span><span style="color:#4070a0">  age_f =~ age
+</span><span style="color:#4070a0">  
+</span><span style="color:#4070a0">  stress_f =~ 1.23017 * scstress
+</span><span style="color:#4070a0">  scstress ~~ .1681464 * scstress
+</span><span style="color:#4070a0">  
+</span><span style="color:#4070a0">  self =~ esteem + attmar + control
+</span><span style="color:#4070a0">&#39;</span>
+
+fit <span style="color:#666">&lt;-</span> sem(mod, data <span style="color:#666">=</span> d, mimic <span style="color:#666">=</span> <span style="color:#4070a0">&#34;mplus&#34;</span>, std.lv <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>)
+
+<span style="color:#007020">summary</span>(fit, rsquare <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>)
+<span style="color:#60a0b0;font-style:italic">## lavaan 0.6-3 ended normally after 29 iterations</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">##   Optimization method                           NLMINB</span>
+<span style="color:#60a0b0;font-style:italic">##   Number of free parameters                         15</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">##   Number of observations                           459</span>
+<span style="color:#60a0b0;font-style:italic">##   Number of missing patterns                         1</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">##   Estimator                                         ML</span>
+<span style="color:#60a0b0;font-style:italic">##   Model Fit Test Statistic                      21.793</span>
+<span style="color:#60a0b0;font-style:italic">##   Degrees of freedom                                 5</span>
+<span style="color:#60a0b0;font-style:italic">##   P-value (Chi-square)                           0.001</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Parameter Estimates:</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">##   Information                                 Observed</span>
+<span style="color:#60a0b0;font-style:italic">##   Observed information based on                Hessian</span>
+<span style="color:#60a0b0;font-style:italic">##   Standard Errors                             Standard</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Latent Variables:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##   age_f =~                                            </span>
+<span style="color:#60a0b0;font-style:italic">##     age               2.226    0.073   30.401    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##   stress_f =~                                         </span>
+<span style="color:#60a0b0;font-style:italic">##     scstress          1.230                           </span>
+<span style="color:#60a0b0;font-style:italic">##   self =~                                             </span>
+<span style="color:#60a0b0;font-style:italic">##     esteem            2.711    0.399    6.789    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     attmar            3.696    0.593    6.228    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     control           0.622    0.097    6.392    0.000</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Covariances:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##   age_f ~~                                            </span>
+<span style="color:#60a0b0;font-style:italic">##     stress_f         -0.306    0.044   -6.929    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     self             -0.089    0.071   -1.263    0.207</span>
+<span style="color:#60a0b0;font-style:italic">##   stress_f ~~                                         </span>
+<span style="color:#60a0b0;font-style:italic">##     self             -0.018    0.075   -0.242    0.809</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Intercepts:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##    .age               4.364    0.104   41.997    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .scstress          2.009    0.061   33.188    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .esteem           15.830    0.184   85.925    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .attmar           22.730    0.413   54.989    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .control           6.743    0.059  114.265    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     age_f             0.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##     stress_f          0.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##     self              0.000                           </span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Variances:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##    .scstress          0.168                           </span>
+<span style="color:#60a0b0;font-style:italic">##    .age               0.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##    .esteem            8.227    2.055    4.004    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .attmar           64.763    5.385   12.026    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .control           1.212    0.128    9.487    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     age_f             1.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##     stress_f          1.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##     self              1.000                           </span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## R-Square:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate</span>
+<span style="color:#60a0b0;font-style:italic">##     scstress          0.900</span>
+<span style="color:#60a0b0;font-style:italic">##     age               1.000</span>
+<span style="color:#60a0b0;font-style:italic">##     esteem            0.472</span>
+<span style="color:#60a0b0;font-style:italic">##     attmar            0.174</span>
+<span style="color:#60a0b0;font-style:italic">##     control           0.242</span>
+
+semPaths(
+  fit, 
+  what <span style="color:#666">=</span> <span style="color:#4070a0">&#34;est&#34;</span>,
+  style <span style="color:#666">=</span> <span style="color:#4070a0">&#34;lisrel&#34;</span>, 
+  weighted <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">FALSE</span>,
+  rotation <span style="color:#666">=</span> <span style="color:#40a070">4</span>, 
+  intercepts <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">FALSE</span>, 
+  nCharNodes <span style="color:#666">=</span> <span style="color:#40a070">0</span>,  
+  edge.label.cex <span style="color:#666">=</span> <span style="color:#40a070">1</span>, 
+  sizeMan <span style="color:#666">=</span> <span style="color:#40a070">10</span>, 
+  sizeLat <span style="color:#666">=</span> <span style="color:#40a070">10</span>
+)</code></pre></div>
+<p><img src="/fig/2019-03-16_02.png" alt="" /><!-- --></p>
+
+<p>The two-step approach is so named because the variance of a variable was estimated first and then entered as a constant in the model. I am uncomfortable, however, with a fixed value being used for an estimated variance. With appropriate constraints, the variance estimation can be built into the model, allowing the estimation of variance and the model in one step.</p>
+
+<p>To do this in <code>lavaan</code>, we must use the <code>lavaan</code> function as the defaults invoked by <code>sem</code> or <code>cfa</code> are incompatible with what needs to be done. Unfortunately, this means that we must build much of the model manually.</p>
+<div class="highlight"><pre style="background-color:#f0f0f0;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">mod <span style="color:#666">&lt;-</span> <span style="color:#4070a0">&#39;
+</span><span style="color:#4070a0"># model
+</span><span style="color:#4070a0">  age_f =~ age
+</span><span style="color:#4070a0">  
+</span><span style="color:#4070a0">  stress_f =~ lambda * scstress
+</span><span style="color:#4070a0">  scstress ~~ e * scstress
+</span><span style="color:#4070a0">  
+</span><span style="color:#4070a0">  self =~ esteem + attmar + control
+</span><span style="color:#4070a0">
+</span><span style="color:#4070a0"># constraints
+</span><span style="color:#4070a0">  var_scstress := lambda^2 + e
+</span><span style="color:#4070a0">  .90 == lambda^2 / var_scstress
+</span><span style="color:#4070a0">  .10 == e / var_scstress
+</span><span style="color:#4070a0">
+</span><span style="color:#4070a0"># originally implied defaults
+</span><span style="color:#4070a0">  age_f ~~ 1 * age_f
+</span><span style="color:#4070a0">  age ~~ 0 * age
+</span><span style="color:#4070a0">  
+</span><span style="color:#4070a0">  stress_f ~~ 1 * stress_f
+</span><span style="color:#4070a0">  
+</span><span style="color:#4070a0">  self ~~ 1 * self
+</span><span style="color:#4070a0">  esteem ~~ esteem
+</span><span style="color:#4070a0">  attmar ~~ attmar
+</span><span style="color:#4070a0">  control ~~ control
+</span><span style="color:#4070a0">&#39;</span>
+
+fit <span style="color:#666">&lt;-</span> lavaan(
+  mod, data <span style="color:#666">=</span> d, 
+  information <span style="color:#666">=</span> <span style="color:#4070a0">&#34;observed&#34;</span>, 
+  auto.cov.lv.x <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>, 
+  meanstructure <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>,
+  int.ov.free <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>
+)
+
+<span style="color:#007020">summary</span>(fit, rsquare <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">TRUE</span>)
+<span style="color:#60a0b0;font-style:italic">## lavaan 0.6-3 ended normally after 38 iterations</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">##   Optimization method                           NLMINB</span>
+<span style="color:#60a0b0;font-style:italic">##   Number of free parameters                         17</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">##   Number of observations                           459</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">##   Estimator                                         ML</span>
+<span style="color:#60a0b0;font-style:italic">##   Model Fit Test Statistic                      21.792</span>
+<span style="color:#60a0b0;font-style:italic">##   Degrees of freedom                                 4</span>
+<span style="color:#60a0b0;font-style:italic">##   P-value (Chi-square)                           0.000</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Parameter Estimates:</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">##   Information                                 Observed</span>
+<span style="color:#60a0b0;font-style:italic">##   Observed information based on                Hessian</span>
+<span style="color:#60a0b0;font-style:italic">##   Standard Errors                             Standard</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Latent Variables:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##   age_f =~                                            </span>
+<span style="color:#60a0b0;font-style:italic">##     age               2.226    0.073   30.299    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##   stress_f =~                                         </span>
+<span style="color:#60a0b0;font-style:italic">##     scstrss (lmbd)    1.229    0.041   30.299    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##   self =~                                             </span>
+<span style="color:#60a0b0;font-style:italic">##     esteem            2.711    0.399    6.790    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     attmar            3.696    0.593    6.228    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     control           0.622    0.097    6.392    0.000</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Covariances:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##   age_f ~~                                            </span>
+<span style="color:#60a0b0;font-style:italic">##     stress_f         -0.306    0.045   -6.780    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     self             -0.089    0.071   -1.263    0.206</span>
+<span style="color:#60a0b0;font-style:italic">##   stress_f ~~                                         </span>
+<span style="color:#60a0b0;font-style:italic">##     self             -0.018    0.075   -0.242    0.809</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Intercepts:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##    .age               4.364    0.104   42.001    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .scstress          2.009    0.060   33.224    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .esteem           15.830    0.184   85.925    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .attmar           22.730    0.413   54.989    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .control           6.743    0.059  114.265    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     age_f             0.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##     stress_f          0.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##     self              0.000                           </span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Variances:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##    .scstress   (e)    0.168    0.011   15.149    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     age_f             1.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##    .age               0.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##     stress_f          1.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##     self              1.000                           </span>
+<span style="color:#60a0b0;font-style:italic">##    .esteem            8.227    2.055    4.004    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .attmar           64.763    5.385   12.026    0.000</span>
+<span style="color:#60a0b0;font-style:italic">##    .control           1.212    0.128    9.487    0.000</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## R-Square:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate</span>
+<span style="color:#60a0b0;font-style:italic">##     scstress          0.900</span>
+<span style="color:#60a0b0;font-style:italic">##     age               1.000</span>
+<span style="color:#60a0b0;font-style:italic">##     esteem            0.472</span>
+<span style="color:#60a0b0;font-style:italic">##     attmar            0.174</span>
+<span style="color:#60a0b0;font-style:italic">##     control           0.242</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Defined Parameters:</span>
+<span style="color:#60a0b0;font-style:italic">##                    Estimate  Std.Err  z-value  P(&gt;|z|)</span>
+<span style="color:#60a0b0;font-style:italic">##     var_scstress      1.678    0.111   15.149    0.000</span>
+<span style="color:#60a0b0;font-style:italic">## </span>
+<span style="color:#60a0b0;font-style:italic">## Constraints:</span>
+<span style="color:#60a0b0;font-style:italic">##                                                |Slack|</span>
+<span style="color:#60a0b0;font-style:italic">##     .90 - (lambda^2/var_scstress)                0.000</span>
+<span style="color:#60a0b0;font-style:italic">##     .10 - (e/var_scstress)                       0.000</span>
+
+semPaths(
+  fit, 
+  what <span style="color:#666">=</span> <span style="color:#4070a0">&#34;est&#34;</span>,
+  style <span style="color:#666">=</span> <span style="color:#4070a0">&#34;lisrel&#34;</span>, 
+  weighted <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">FALSE</span>,
+  rotation <span style="color:#666">=</span> <span style="color:#40a070">4</span>, 
+  intercepts <span style="color:#666">=</span> <span style="color:#007020;font-weight:bold">FALSE</span>, 
+  nCharNodes <span style="color:#666">=</span> <span style="color:#40a070">0</span>,  
+  edge.label.cex <span style="color:#666">=</span> <span style="color:#40a070">1</span>, 
+  sizeMan <span style="color:#666">=</span> <span style="color:#40a070">10</span>, 
+  sizeLat <span style="color:#666">=</span> <span style="color:#40a070">10</span>
+)</code></pre></div>
+<p><img src="/fig/2019-03-16_03.png" alt="" /><!-- --></p>
+
+<p>An additional degree of freedom was used in the one-step approach and we now have standard errors for the loading and error term of <code>scstress</code> owing to the uncertainty of the variance estimation. Little else has changed in the model, however, but the one-step approach seems, in my opinion, more right than the two-step approach. I also wonder whether there are any scenarios or models where there is a profound difference between the two approaches.</p>
+
+</article>
+
+
+    </div>
+<div class="footer">
+    
+    
+    <div class="footer-links">
+        <a href="https://github.com/jaydennord">GitHub</a>
+        <a href="/posts/index.xml">RSS</a>
+    </div>
+    
+
+    
+    
+    <div class="copyright">© 2019 — All rights reserved.</div>
+    
+</div>
+</div>
+</body>
+
+</html>
